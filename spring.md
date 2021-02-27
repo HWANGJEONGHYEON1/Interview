@@ -34,3 +34,16 @@
  - DispathcerServlet는 뷰 리졸버에게 해당 뷰를 찾아달라고 요청
  - 뷰 리졸버는 해당 뷰를 DispathcerServlet에게 전달
  
+### 객체 주입방법
+ - 생성자 주입 : 생서자 호출 시점에 1회 호출을 보장하며 주입받은 객체가 변하지 않거나, 반드시 주입해야하는 경우에 해당한다. 생상자 주입을 통행 불변성보장( 컴파일시점에 객체를 주입받아 테스트코드를 작성하며, 주입하는 객체가 컴파일 시점에 누라된 경우 확인 가능)
+ - 세터 주입 : 주입받은 객체가 변경할 가능성이 있을 때 
+ - 필드 주입 : 외부에서 변경 불가능, 테스트 코드 작성시 테스트 코드를 작성할 수가 없음
+
+ ### 스프링 시큐리티 과정
+ - 사용자가 로그인을 하면 AuthenticationFilter가 userpasswordAuthenticationToken을 생성
+ - AuthenticationManager에게 토큰 전달하여 등록된 AuthenticationProvider를 조회하여 인증요구
+ - Provider는 UserDetailService를 통해 입력받은 사용자 아이디를 DB에서 조회함
+ - 입력받은 비밀번호를 암호화하여 DB의 비밀번호와 매칭하고 성공되면 token을 manager에게 반환
+ - manager는 그것을 다시 filter로 전달
+ - 필터는 전달받은 token을 LoginSuccessHandler에게 전송하고 SecurityContextHolder에 저장
+ 
